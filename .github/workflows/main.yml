@@ -1,0 +1,15 @@
+on:
+  workflow_dispatch:    # Invoke Manually
+jobs:
+  use_api:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: read
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl --request GET \
+          --url "https://api.github.com/repos/mahendra-shinde/gh-100-demos/issues" \
+          --header "Accept: application/vnd.github+json" \
+          --header "Authorization: Bearer $GH_TOKEN"
